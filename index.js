@@ -59,7 +59,7 @@ const delay = 600000
 
 console.log("[WEBHOOK] Ready!")
 
-const interval = () => {
+(function loop() {
     request.get("https://api.lever.co/v0/postings/discordapp?mode=json", { json: true }).then(async res => {
         const data = await fs.readJson("./data.json")
         const write = await fs.writeJson("./data.json")
@@ -105,8 +105,8 @@ const interval = () => {
         }
     }).catch(err => console.error("[ERROR]", err))
 
-    setTimeout(interval, delay)
-}
+    setTimeout(loop, delay)
+})()
 
 interval()
 
