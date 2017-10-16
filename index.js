@@ -59,7 +59,7 @@ const delay = 600000
 
 console.log("[WEBHOOK] Ready!")
 
-(function loop() {
+function loop() {
     request.get("https://api.lever.co/v0/postings/discordapp?mode=json", { json: true }).then(async res => {
         const data = await fs.readJson("./data.json")
         const write = await fs.writeJson("./data.json")
@@ -104,10 +104,8 @@ console.log("[WEBHOOK] Ready!")
              .catch(console.error)
         }
     }).catch(err => console.error("[ERROR]", err))
-
-    setTimeout(loop, delay)
-})()
-
-interval()
+}
+loop()
+setInterval(loop, delay)
 
 process.on("unhandledRejection", err => console.log(err))
