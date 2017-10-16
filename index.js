@@ -55,10 +55,11 @@ const colors = {
     Added: 7506394,
     Removed: 11143176
 }
+const delay = 600000
 
 console.log("[WEBHOOK] Ready!")
 
-setInterval(() => {
+const interval = () => {
     request.get("https://api.lever.co/v0/postings/discordapp?mode=json", { json: true }).then(async res => {
         const data = await fs.readFile("./data.json")
         const write = await fs.writeFile("./data.json")
@@ -103,6 +104,10 @@ setInterval(() => {
              .catch(console.error)
         }
     }).catch(err => console.error("[ERROR]", err))
-}, 10000) // every 10 minutes
+
+    setTimeout(interval, delay)
+}
+
+interval()
 
 process.on("unhandledRejection", err => console.log(err))
