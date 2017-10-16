@@ -61,8 +61,8 @@ console.log("[WEBHOOK] Ready!")
 
 const interval = () => {
     request.get("https://api.lever.co/v0/postings/discordapp?mode=json", { json: true }).then(async res => {
-        const data = await fs.readFile("./data.json")
-        const write = await fs.writeFile("./data.json")
+        const data = await fs.readJson("./data.json")
+        const write = await fs.writeJson("./data.json")
         
         const mapRes = res.map((x, i) => [x.id, i])
         const mapData = data.map((x, i) => [x.id, i])
