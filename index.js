@@ -1,7 +1,6 @@
 const { WebhookClient, RichEmbed } = require("discord.js")
 const fs = require("fs-extra")
 const config = require("./config")
-const data = require("./data.json")
 const webhook = new WebhookClient(config.id, config.token, { disableEveryone: true })
 const request = require("request-promise-native")
 const requestOG = require("request")
@@ -55,7 +54,7 @@ const colors = {
     Added: 7506394,
     Removed: 11143176
 }
-const delay = 600000
+const delay = 600000 // 10 mins
 
 console.log("[WEBHOOK] Ready!")
 
@@ -63,6 +62,7 @@ const interval = () => {
     request.get("https://api.lever.co/v0/postings/discordapp?mode=json", { json: true }).then(async res => {
         const data = await fs.readJson("./data.json")
         const write = await fs.writeJson("./data.json", res)
+        if (res !== data) const writeSeparate = await fs.writeJson(`./data/${new Date().toJSON().substr(0,16).replace(":", ".")}Z.json`, res)
         
         const mapRes = res.map((x, i) => [x.id, i])
         const mapData = data.map((x, i) => [x.id, i])
@@ -75,7 +75,7 @@ const interval = () => {
             const job = data[jobArr[1]]
             const status = "Removed"
             const embed = new RichEmbed()
-             .setAuthor(job.text, image(job.categories.team), job.hostedUrl)
+             .setAuthor(job.text, image(job.categories.team))
              .setColor(colors[status])
              .setDescription(truncate(job.descriptionPlain))
              .setFooter(`${job.categories.team} (${job.categories.commitment})`)
