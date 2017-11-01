@@ -62,7 +62,7 @@ const interval = () => {
     request.get("https://api.lever.co/v0/postings/discordapp?mode=json", { json: true }).then(async res => {
         const data = await fs.readJson("./data.json")
         const write = await fs.writeJson("./data.json", res)
-        if (res !== data) const writeSeparate = await fs.writeJson(`./data/${new Date().toJSON().substr(0,16).replace(":", ".")}Z.json`, res)
+        if (res !== data) writeSeparate = await fs.writeJson(`./data/${new Date().toJSON().substr(0,16).replace(":", ".")}Z.json`, res)
         
         const mapRes = res.map((x, i) => [x.id, i])
         const mapData = data.map((x, i) => [x.id, i])
