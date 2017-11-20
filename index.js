@@ -64,8 +64,8 @@ const interval = () => {
     const write = await fs.writeJson("./data.json", _res)
     if (_res !== _data) writeSeparate = await fs.writeJson(`./data/${new Date().toJSON().substr(0,16).replace(":", ".")}Z.json`, _res)
 
-    const data = _data.jobs
     const res = _res.jobs
+    const data = _data.jobs
     
     // calculate the difference
     const mapRes = res.map((x, i) => [x.id, i])
@@ -85,7 +85,7 @@ const interval = () => {
       const embed = new RichEmbed()
        .setAuthor(job.title, image(job.departments[0].name))
        .setColor(colors[status])
-       .setDescription(truncate(job.description))
+       .setDescription(truncate(description))
        .setFooter(`${job.departments[0].name}`)
        .setTimestamp(new Date(job.updated_at))
       
@@ -108,7 +108,7 @@ const interval = () => {
       const embed = new RichEmbed()
        .setAuthor(job.title, image(job.departments[0].name), job.absolute_url)
        .setColor(colors[status])
-       .setDescription(truncate(job.description))
+       .setDescription(truncate(description))
        .addField("What you'll be doing", truncate(listOne))
        .addField("What you should have", truncate(listTwo))
        .setFooter(`${job.departments[0].name}`)
