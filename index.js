@@ -30,6 +30,7 @@ const assets = {
   JOBS_ROLE_CX: host + "0ByItrFqbLRC0amdxVE03anlndlU"
 }
 const image = (team) => {
+  team = team.trim()
   switch (team) {
     case "Business Development":
       return assets.JOBS_ROLE_BD
