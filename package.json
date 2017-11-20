@@ -1,8 +1,8 @@
 {
   "name": "discord-jobs-webhook",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Discord webhook that checks new Discord job openings",
-  "main": "indexr.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/ThaTiemsz/Discord-Jobs-Webhook#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "discord.js": "^11.2.1",
     "fs-extra": "^4.0.2",
+    "he": "^1.1.1",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5"
   }
