@@ -4,7 +4,7 @@
   "description": "Discord webhook that checks new Discord job openings",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "pm2 start index.js --name\"jobs\" --log-date-format=\"YYYY-MM-DD HH:mm Z\""
   },
   "repository": {
     "type": "git",
